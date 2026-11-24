@@ -1,0 +1,14 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Blokir akses langsung ke folder kode aplikasi
+RewriteRule ^(config|app|database)(/|$) - [F,L]
+
+# File dan folder yang benar-benar ada (css, js, img) dilayani apa adanya
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Semua permintaan lain diarahkan ke front controller
+RewriteRule ^(.*)$ index.php?r=$1 [QSA,L]

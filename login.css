@@ -1,0 +1,401 @@
+/* ============================================================
+   WARKOP KHANSA - Halaman Login
+   ============================================================ */
+
+body.login-body {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    min-height: 100vh;
+    color: #fff;
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(200, 16, 46, 0.35), transparent 55%),
+        repeating-linear-gradient(90deg, #14040a 0 46px, #5c0814 46px 58px, #14040a 58px 104px);
+    background-color: #0d0d0f;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.login-wrapper {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 6vw;
+    min-height: calc(100vh - 60px);
+}
+
+/* ---------- Panel kiri: logo dan judul ---------- */
+.login-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeUp 0.8s ease both;
+}
+
+.login-logo {
+    width: min(260px, 60vw);
+    height: auto;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.6));
+    animation: floaty 5s ease-in-out infinite;
+}
+
+.brand-title {
+    margin-top: 22px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.brand-title span {
+    color: var(--merah);
+}
+
+.brand-tagline {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #ffd6dc;
+}
+
+/* ---------- Panel kanan: kartu form ---------- */
+.login-card {
+    background: linear-gradient(180deg, #111a2e 0%, #0b1220 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+    animation: fadeUp 0.9s ease both;
+}
+
+.login-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    color: #9aa3b5;
+    font-size: 0.92rem;
+    margin-top: 4px;
+    margin-bottom: 26px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label,
+.label-text {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon > i {
+    position: absolute;
+    left: 14px;
+    color: #7d8699;
+    pointer-events: none;
+    transition: color 0.25s ease;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 13px 44px 13px 42px;
+    background: #171f33;
+    border: 1px solid #263049;
+    border-radius: 12px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.input-icon input::placeholder { color: #5f6880; }
+
+.input-icon input:hover { border-color: #3a4666; }
+
+.input-icon input:focus {
+    outline: none;
+    border-color: var(--merah);
+    background: #1b2440;
+    box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.2);
+}
+
+.input-icon input:focus ~ i,
+.input-icon:focus-within > i {
+    color: var(--merah);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #7d8699;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.toggle-password:hover { color: #fff; transform: scale(1.1); }
+
+/* Pilihan role */
+.role-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.role-option {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.role-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.role-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #263049;
+    border-radius: 12px;
+    background: #171f33;
+    color: #d1d5db;
+    font-size: 0.88rem;
+    transition: transform 0.2s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.role-option:hover span {
+    transform: translateY(-2px);
+    border-color: #3a4666;
+}
+
+.role-option input:checked + span {
+    background: linear-gradient(135deg, #e0112f, var(--merah-gelap));
+    border-color: var(--merah);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(200, 16, 46, 0.35);
+}
+
+.role-option input:focus-visible + span {
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.4);
+}
+
+/* Tombol login */
+.btn-login {
+    margin-top: 10px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #e0112f, var(--merah-gelap));
+    box-shadow: 0 12px 26px rgba(200, 16, 46, 0.35);
+}
+
+.btn-login:hover:not(:disabled) {
+    box-shadow: 0 16px 32px rgba(200, 16, 46, 0.5);
+}
+
+.btn-login.loading .btn-text::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    vertical-align: -2px;
+    animation: spin 0.7s linear infinite;
+}
+
+/* Alert */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    margin-bottom: 18px;
+}
+
+.alert-danger {
+    background: rgba(200, 16, 46, 0.15);
+    border: 1px solid rgba(200, 16, 46, 0.5);
+    color: #ffb3bd;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.45);
+    color: #bbf7d0;
+}
+
+/* Efek kartu gagal login */
+.login-card.shake { animation: shake 0.5s ease, fadeUp 0.9s ease both; }
+
+/* Footer */
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 6vw;
+    font-size: 0.8rem;
+    color: #7d8699;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Responsif */
+@media (max-width: 860px) {
+    .login-wrapper {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 32px 20px;
+    }
+    .login-logo { width: min(200px, 55vw); }
+    .login-card { padding: 30px 22px; }
+}
+
+@media (max-width: 420px) {
+    .role-options { grid-template-columns: 1fr; }
+    .login-footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* ---------- Animasi ---------- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-8px); }
+    40%      { transform: translateX(8px); }
+    60%      { transform: translateX(-5px); }
+    80%      { transform: translateX(5px); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Tampilan realistis: grain, cahaya kursor, vignette, pantulan logo ---------- */
+body.login-body { position: relative; overflow: hidden; }
+
+/* Tekstur grain halus */
+body.login-body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Cahaya yang mengikuti kursor dan vignette di tepi */
+body.login-body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(520px circle at var(--mx, 30%) var(--my, 35%), rgba(255, 60, 90, 0.2), transparent 60%),
+        radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.15s linear;
+}
+
+.login-wrapper,
+.login-footer { position: relative; z-index: 1; }
+
+/* Logo dengan pantulan di bawahnya */
+.login-logo {
+    -webkit-box-reflect: below 8px linear-gradient(transparent 62%, rgba(255, 255, 255, 0.22));
+}
+
+/* Judul dengan gradasi merah */
+.brand-title span {
+    background: linear-gradient(90deg, #ff3b5c, #c8102e 60%, #8f0b20);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Kartu kaca dengan border bercahaya */
+.login-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(22, 30, 52, 0.85) 0%, rgba(9, 13, 24, 0.9) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+.login-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 60, 90, 0.8), rgba(255, 255, 255, 0.05) 35%, rgba(255, 255, 255, 0.05) 65%, rgba(200, 16, 46, 0.6));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Input dan tombol sedikit lebih tegas */
+.input-icon input { background: rgba(15, 22, 40, 0.8); }
+.btn-login { letter-spacing: 0.4px; }
+
+/* ---------- Latar malam pertandingan (dibuat dari CSS, bukan foto) ---------- */
+body.login-body {
+    background:
+        /* lampu sorot dari dua sisi atas */
+        conic-gradient(from 195deg at 0% 0%, transparent 0deg, rgba(255, 244, 214, 0.10) 6deg, transparent 14deg),
+        conic-gradient(from 165deg at 100% 0%, transparent 0deg, rgba(255, 244, 214, 0.10) 6deg, transparent 14deg),
+        /* titik lampu stadion */
+        radial-gradient(circle at 8% 6%, rgba(255, 250, 235, 0.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 10%, rgba(255, 250, 235, 0.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 7%, rgba(255, 250, 235, 0.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 12%, rgba(255, 250, 235, 0.8) 0 2px, transparent 3px),
+        /* kabut merah di tengah */
+        radial-gradient(ellipse 70% 45% at 50% 40%, rgba(200, 16, 46, 0.22), transparent 70%),
+        /* baris tribun di bawah */
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 12px),
+        linear-gradient(180deg, #120609 0%, #0a0507 60%, #050203 100%);
+    background-color: #0a0507;
+}
